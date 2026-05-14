@@ -11,17 +11,12 @@
 <body>
     <a-scene renderer="colorManagement: true">
 
-        <!-- Carga del modelo 3D de la sala -->
+        <!-- Carga del modelo 3D del museo -->
         <a-assets>
             <a-asset-item id="museo" src="museo.glb"></a-asset-item>
         </a-assets>
 
-        <!-- Luces -->
-        <a-light type="ambient" color="#FFFFFF" intensity="1.2"></a-light>
-        <a-light type="point" position="4 6 4" intensity="1.5" color="#FFFFFF"></a-light>
-        <a-light type="point" position="-4 6 -4" intensity="1.2" color="#FFFFFF"></a-light>
-
-        <!-- Modelo de la sala del CTIF -->
+        <!-- Museo CTIF -->
         <a-entity 
             id="sala-ctif"
             gltf-model="#museo"
@@ -30,17 +25,42 @@
             scale="1 1 1">
         </a-entity>
 
-        <!-- Cámara para entrar en el museo -->
+        <!-- Luces suaves -->
+        <a-light 
+            type="ambient" 
+            color="#FFFFFF" 
+            intensity="0.35">
+        </a-light>
+
+        <a-light 
+            type="directional" 
+            position="0 5 4" 
+            intensity="0.6" 
+            color="#FFFFFF">
+        </a-light>
+
+        <a-light 
+            type="point" 
+            position="0 3 0" 
+            intensity="0.35" 
+            distance="8" 
+            decay="2" 
+            color="#FFFFFF">
+        </a-light>
+
+        <!-- Cámara dentro del museo -->
         <a-entity 
+            id="camara"
             camera
             look-controls
-            wasd-controls="acceleration: 20"
-            position="0 1.6 6">
+            wasd-controls="acceleration: 12"
+            position="0 1.6 2.5"
+            rotation="0 0 0">
         </a-entity>
 
         <!-- 
             TODO LO QUE VA DENTRO DEL MUSEO.
-            Si no queda bien colocado, cambia SOLO position, rotation o scale de este grupo.
+            Si no queda centrado, cambia SOLO position de este grupo.
         -->
         <a-entity 
             id="grupo-prototipos"
@@ -228,9 +248,23 @@
                 color="#111111">
             </a-box>
 
-            <a-sphere position="0.7 1.7 0.58" radius="0.09" color="red"></a-sphere>
-            <a-sphere position="0.7 1.45 0.58" radius="0.09" color="yellow"></a-sphere>
-            <a-sphere position="0.7 1.2 0.58" radius="0.09" color="green"></a-sphere>
+            <a-sphere 
+                position="0.7 1.7 0.58" 
+                radius="0.09" 
+                color="red">
+            </a-sphere>
+
+            <a-sphere 
+                position="0.7 1.45 0.58" 
+                radius="0.09" 
+                color="yellow">
+            </a-sphere>
+
+            <a-sphere 
+                position="0.7 1.2 0.58" 
+                radius="0.09" 
+                color="green">
+            </a-sphere>
 
             <a-text 
                 value="Semáforos programados"
@@ -275,7 +309,7 @@
 
         </a-entity>
 
-        <!-- Fondo -->
+        <!-- Fondo exterior -->
         <a-sky color="#DDEEFF"></a-sky>
 
     </a-scene>
