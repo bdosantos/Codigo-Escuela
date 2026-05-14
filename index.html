@@ -1,82 +1,283 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prototipos inteligentes para el entorno urbano</title>
 
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
 </head>
+
 <body>
-    <a-scene vr-mode-ui="enabled: true">
-        <!-- Carga de modelos -->
+    <a-scene renderer="colorManagement: true">
+
+        <!-- Carga del modelo 3D de la sala -->
         <a-assets>
-            <a-asset-item id="ciudad-glb" src="ciudad.glb"></a-asset-item>
-            <a-asset-item id="jake-glb" src="jake.glb"></a-asset-item>
+            <a-asset-item id="museo" src="museo.glb"></a-asset-item>
         </a-assets>
 
-        <!-- Modelo 3D del museo con ajustes -->
+        <!-- Luces -->
+        <a-light type="ambient" color="#FFFFFF" intensity="1.2"></a-light>
+        <a-light type="point" position="4 6 4" intensity="1.5" color="#FFFFFF"></a-light>
+        <a-light type="point" position="-4 6 -4" intensity="1.2" color="#FFFFFF"></a-light>
+
+        <!-- Modelo de la sala del CTIF -->
         <a-entity 
-            gltf-model="#ciudad-glb" 
-            scale="20 10 20" <!-- Ajuste para que el museo sea más grande -->
-            position="0 0 0" 
-            static-body>
-            
-            <!-- Modelo Jake ajustado dentro del museo -->
-            <a-entity 
-                gltf-model="#jake-glb" 
-                scale="0.25 0.25 0.25" <!-- Jake reducido para encajar dentro -->
-                position="0 0 0"> <!-- Jake colocado sobre el suelo del museo -->
-            </a-entity>
-
-            <!-- Cámara ajustada dentro del museo -->
-            <a-entity id="rig" position="10 1,6 0">
-                <a-entity 
-                    camera 
-                    look-controls 
-                    wasd-controls="acceleration: 200">
-                </a-entity>
-            </a-entity>
-            
-            <!-- Permitir movimiento con orientación del dispositivo -->
-            <a-entity mobile-movement></a-entity>
-
-            <!-- Script para movimiento con orientación del dispositivo -->
-            <script>
-                AFRAME.registerComponent('mobile-movement', {
-                    init: function () {
-                        const el = this.el;
-                        window.addEventListener('deviceorientation', function (event) {
-                            const beta = event.beta; // Inclinación frontal-trasera
-                            const gamma = event.gamma; // Inclinación lateral
-
-                            // Movimiento adelante/atrás
-                            if (beta > 15) {
-                                el.object3D.position.z -= 2; // Ajustado para un movimiento más fluido
-                            }
-                            if (beta < -15) {
-                                el.object3D.position.z += 2;
-                            }
-
-                            // Movimiento izquierda/derecha
-                            if (gamma > 10) {
-                                el.object3D.position.x += 2;
-                            }
-                            if (gamma < -10) {
-                                el.object3D.position.x -= 2;
-                            }
-                        });
-                    }
-                });
-            </script>
+            id="sala-ctif"
+            gltf-model="#museo"
+            position="0 0 0"
+            rotation="0 0 0"
+            scale="1 1 1">
         </a-entity>
 
-        <!-- Iluminación mejorada -->
-        <a-light type="ambient" color="#FFFFFF" intensity="1"></a-light>
-        <a-light type="point" position="10 10 10" intensity="2" color="#FFFFFF"></a-light>
-        <a-light type="point" position="-10 10 10" intensity="2" color="#FFFFFF"></a-light>
-        <a-light type="point" position="0 5 0" intensity="1.5" color="#FFFFFF"></a-light>
+        <!-- Cámara para entrar en el museo -->
+        <a-entity 
+            camera
+            look-controls
+            wasd-controls="acceleration: 20"
+            position="0 1.6 6">
+        </a-entity>
+
+        <!-- 
+            TODO LO QUE VA DENTRO DEL MUSEO.
+            Si no queda bien colocado, cambia SOLO position, rotation o scale de este grupo.
+        -->
+        <a-entity 
+            id="grupo-prototipos"
+            position="0 0 0"
+            rotation="0 0 0"
+            scale="1 1 1">
+
+            <!-- Título principal -->
+            <a-text 
+                value="Prototipos inteligentes para el entorno urbano"
+                position="0 3.2 -4"
+                align="center"
+                color="#111111"
+                width="7">
+            </a-text>
+
+            <!-- Subtítulo -->
+            <a-text 
+                value="Feria de Proyectos - CTIF de Leganés - 12 de julio de 2026"
+                position="0 2.8 -4"
+                align="center"
+                color="#333333"
+                width="6">
+            </a-text>
+
+            <!-- Peana 1: casa con sensor -->
+            <a-box 
+                position="-3 0.3 -2.5" 
+                width="1.3" 
+                height="0.4" 
+                depth="1.3" 
+                color="#A0A0A0">
+            </a-box>
+
+            <a-box 
+                position="-3 0.9 -2.5" 
+                width="0.8" 
+                height="0.8" 
+                depth="0.8" 
+                color="#4CC3D9">
+            </a-box>
+
+            <a-cone 
+                position="-3 1.45 -2.5"
+                radius-bottom="0.65"
+                radius-top="0"
+                height="0.5"
+                color="#1B6F82"
+                rotation="0 45 0">
+            </a-cone>
+
+            <a-text 
+                value="Casa con sensor de proximidad"
+                position="-3 1.9 -2.5"
+                align="center"
+                color="#000000"
+                width="2.7">
+            </a-text>
+
+            <!-- Peana 2: casa con código -->
+            <a-box 
+                position="0 0.3 -2.5" 
+                width="1.3" 
+                height="0.4" 
+                depth="1.3" 
+                color="#A0A0A0">
+            </a-box>
+
+            <a-box 
+                position="0 0.9 -2.5" 
+                width="0.8" 
+                height="0.8" 
+                depth="0.8" 
+                color="#FFC65D">
+            </a-box>
+
+            <a-cone 
+                position="0 1.45 -2.5"
+                radius-bottom="0.65"
+                radius-top="0"
+                height="0.5"
+                color="#B87918"
+                rotation="0 45 0">
+            </a-cone>
+
+            <a-box 
+                position="0 0.75 -1.88"
+                width="0.28"
+                height="0.38"
+                depth="0.04"
+                color="#222222">
+            </a-box>
+
+            <a-text 
+                value="Casa con apertura por código"
+                position="0 1.9 -2.5"
+                align="center"
+                color="#000000"
+                width="2.7">
+            </a-text>
+
+            <!-- Peana 3: farolas -->
+            <a-box 
+                position="3 0.3 -2.5" 
+                width="1.3" 
+                height="0.4" 
+                depth="1.3" 
+                color="#A0A0A0">
+            </a-box>
+
+            <a-cylinder 
+                position="3 1 -2.5" 
+                radius="0.04" 
+                height="1.2" 
+                color="#333333">
+            </a-cylinder>
+
+            <a-sphere 
+                position="3 1.65 -2.5" 
+                radius="0.18" 
+                color="#FFFF66">
+            </a-sphere>
+
+            <a-text 
+                value="Farolas con LDR"
+                position="3 2 -2.5"
+                align="center"
+                color="#000000"
+                width="2.7">
+            </a-text>
+
+            <!-- Peana 4: cubo de basura automático -->
+            <a-box 
+                position="-2 0.3 0.7" 
+                width="1.3" 
+                height="0.4" 
+                depth="1.3" 
+                color="#A0A0A0">
+            </a-box>
+
+            <a-cylinder 
+                position="-2 0.95 0.7" 
+                radius="0.35" 
+                height="0.9" 
+                color="#2E8B57">
+            </a-cylinder>
+
+            <a-box 
+                position="-2 1.45 0.7"
+                width="0.8"
+                height="0.08"
+                depth="0.8"
+                color="#1E5E3D">
+            </a-box>
+
+            <a-text 
+                value="Cubo de basura automático"
+                position="-2 1.9 0.7"
+                align="center"
+                color="#000000"
+                width="2.7">
+            </a-text>
+
+            <!-- Peana 5: semáforo -->
+            <a-box 
+                position="0.7 0.3 0.7" 
+                width="1.3" 
+                height="0.4" 
+                depth="1.3" 
+                color="#A0A0A0">
+            </a-box>
+
+            <a-cylinder 
+                position="0.7 0.9 0.7"
+                radius="0.04"
+                height="0.9"
+                color="#222222">
+            </a-cylinder>
+
+            <a-box 
+                position="0.7 1.45 0.7" 
+                width="0.35" 
+                height="0.9" 
+                depth="0.22" 
+                color="#111111">
+            </a-box>
+
+            <a-sphere position="0.7 1.7 0.58" radius="0.09" color="red"></a-sphere>
+            <a-sphere position="0.7 1.45 0.58" radius="0.09" color="yellow"></a-sphere>
+            <a-sphere position="0.7 1.2 0.58" radius="0.09" color="green"></a-sphere>
+
+            <a-text 
+                value="Semáforos programados"
+                position="0.7 2.1 0.7"
+                align="center"
+                color="#000000"
+                width="2.7">
+            </a-text>
+
+            <!-- Peana 6: ascensor -->
+            <a-box 
+                position="3.2 0.3 0.7" 
+                width="1.3" 
+                height="0.4" 
+                depth="1.3" 
+                color="#A0A0A0">
+            </a-box>
+
+            <a-box 
+                position="3.2 1.1 0.7" 
+                width="0.75" 
+                height="1.2" 
+                depth="0.55" 
+                color="#999999">
+            </a-box>
+
+            <a-box 
+                position="3.2 1.1 0.41"
+                width="0.08"
+                height="1"
+                depth="0.03"
+                color="#333333">
+            </a-box>
+
+            <a-text 
+                value="Ascensor con pulsadores"
+                position="3.2 2 0.7"
+                align="center"
+                color="#000000"
+                width="2.7">
+            </a-text>
+
+        </a-entity>
+
+        <!-- Fondo -->
+        <a-sky color="#DDEEFF"></a-sky>
+
     </a-scene>
 </body>
 </html>
