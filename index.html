@@ -14,6 +14,7 @@
         <!-- Carga del modelo 3D del museo -->
         <a-assets>
             <a-asset-item id="museo" src="museo.glb"></a-asset-item>
+            <a-asset-item id="casa1" src="casa1.glb"></a-asset-item>
         </a-assets>
 
         <!-- Museo CTIF -->
@@ -94,14 +95,12 @@
                 depth="1.3" 
                 color="#A0A0A0">
             </a-box>
-
-            <a-box 
-                position="-10 0.9 -4.5" 
-                width="0.8" 
-                height="0.8" 
-                depth="0.8" 
-                color="#4CC3D9">
-            </a-box>
+<a-entity
+    gltf-model="#casa1"
+    position="-3 0.7 -2.5"
+    rotation="0 0 0"
+    scale="0.4 0.4 0.4">
+</a-entity>
 
             <a-cone 
                 position="-3 1.45 -2.5"
