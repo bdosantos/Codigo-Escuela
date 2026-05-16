@@ -16,6 +16,7 @@
             <a-asset-item id="museo" src="museo.glb"></a-asset-item>
             <a-asset-item id="casa1" src="casa1.glb"></a-asset-item>
             <a-asset-item id="garaje" src="garaje.glb"></a-asset-item>
+            <a-asset-item id="farola" src="farola.glb"></a-asset-item>
         </a-assets>
 
         <!-- Museo CTIF -->
@@ -24,14 +25,14 @@
             gltf-model="#museo"
             position="0 0 0"
             rotation="0 0 0"
-            scale="2 1 3">
+            scale="2 2 3">
         </a-entity>
 
         <!-- Luces suaves -->
         <a-light 
             type="ambient" 
             color="#FFFFFF" 
-            intensity="0.35">
+            intensity="0.5">
         </a-light>
 
         <a-light 
@@ -89,12 +90,12 @@
             </a-text>
 
             <!-- casa con sensor -->
-           
             <a-entity gltf-model="#casa1" rotate="0 90 0" position="-11 0 -8.5" scale="0.45 0.45 0.3"> </a-entity>
-            
             <!-- Garaje -->
-           
-            <a-entity gltf-model="#garaje" rotate="0 90 0" position="-8 0 -8.5" scale="1 1 1"> </a-entity>
+            <a-entity gltf-model="#garaje" rotate="0 0 0" position="-8 0 -8.5" scale="1 1 1"> </a-entity>
+            <!-- Farola -->
+            <a-entity gltf-model="#farola" rotate="0 0 0" position="-4 0 -8.5" scale="1 1 1"> </a-entity>
+
 
             <!-- casa con código -->
             <a-box 
@@ -138,35 +139,8 @@
                 width="2.7">
             </a-text>
 
-            <!-- Peana 3: farolas -->
-            <a-box 
-                position="3 0.3 -2.5" 
-                width="1.3" 
-                height="0.4" 
-                depth="1.3" 
-                color="#A0A0A0">
-            </a-box>
-
-            <a-cylinder 
-                position="3 1 -2.5" 
-                radius="0.04" 
-                height="1.2" 
-                color="#333333">
-            </a-cylinder>
-
-            <a-sphere 
-                position="3 1.65 -2.5" 
-                radius="0.18" 
-                color="#FFFF66">
-            </a-sphere>
-
-            <a-text 
-                value="Farolas con LDR"
-                position="3 2 -2.5"
-                align="center"
-                color="#000000"
-                width="2.7">
-            </a-text>
+           
+              
 
             <!-- Peana 4: cubo de basura automático -->
             <a-box 
