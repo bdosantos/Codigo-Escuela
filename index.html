@@ -6,12 +6,34 @@
     <title>Prototipos inteligentes para el entorno urbano</title>
 
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+    <script>
+        AFRAME.registerComponent('activar-video', {
+            init: function () {
+                const video = document.querySelector('#videocubo');
+
+                function reproducir() {
+                    if (!video) return;
+
+                    video.muted = true;
+                    video.play().catch(function (error) {
+                        console.log("El navegador espera una interacción para reproducir el vídeo.");
+                    });
+                }
+
+                this.el.addEventListener('loaded', reproducir);
+                window.addEventListener('click', reproducir);
+                window.addEventListener('touchstart', reproducir);
+                window.addEventListener('keydown', reproducir);
+            }
+        });
+    </script>
 </head>
 
 <body>
-    <a-scene renderer="colorManagement: true">
+    <a-scene renderer="colorManagement: true" activar-video>
 
-        <!-- Carga del modelo 3D del museo -->
+        <!-- ASSETS -->
         <a-assets>
             <a-asset-item id="museo" src="museo.glb"></a-asset-item>
             <a-asset-item id="casa1" src="casa1.glb"></a-asset-item>
@@ -19,17 +41,33 @@
             <a-asset-item id="farola" src="farola.glb"></a-asset-item>
             <a-asset-item id="Barrera" src="Barrera.glb"></a-asset-item>
             <a-asset-item id="semaforos" src="semaforos.glb"></a-asset-item>
-             <a-asset-item id="basurero" src="basurero.glb"></a-asset-item>
+            <a-asset-item id="basurero" src="basurero.glb"></a-asset-item>
+
             <img id="cartel" src="cartel.jpg">
             <img id="jornadas" src="jornadas.png">
-            <video id="videocubo" src="videocubo.mp4" loop muted playsinline webkit-playsinline preload="auto"></video>
-             <img id="cartelbasura" src="cartelbasura.jpg">
+            <img id="cartelbasura" src="cartelbasura.jpg">
+
+            <video 
+                id="videocubo" 
+                src="videocubo.mp4" 
+                loop 
+                muted 
+                playsinline 
+                webkit-playsinline 
+                preload="auto">
+            </video>
         </a-assets>
 
-        <!-- Museo CTIF -->
-        <a-entity id="sala-ctif"  gltf-model="#museo"  position="0 0 0"  rotation="0 0 0"  scale="2 2 3">  </a-entity>
+        <!-- MUSEO -->
+        <a-entity 
+            id="sala-ctif"  
+            gltf-model="#museo"  
+            position="0 0 0"  
+            rotation="0 0 0"  
+            scale="2 2 3">
+        </a-entity>
 
-        <!-- Luces suaves -->
+        <!-- LUCES -->
         <a-light 
             type="ambient" 
             color="#FFFFFF" 
@@ -52,7 +90,7 @@
             color="#FFFFFF">
         </a-light>
 
-        <!-- Cámara dentro del museo -->
+        <!-- CÁMARA -->
         <a-entity 
             id="camara"
             camera
@@ -62,35 +100,92 @@
             rotation="0 0 0">
         </a-entity>
 
-        <!-- 
-            TODO LO QUE VA DENTRO DEL MUSEO.
-            Si no queda centrado, cambia SOLO position de este grupo.
-        -->
-       
-            <!-- casa con sensor -->
-            <a-entity gltf-model="#casa1" rotation="0 90 0" position="-11 0 -5" scale="0.7 0.7 0.6"> </a-entity>
-            <!-- Garaje -->
-            <a-entity gltf-model="#garaje" rotation="0 90 0" position="-11 0 6" scale="0.8 0.8 0.7"> </a-entity>
-            <!-- Farola -->
-            <a-entity gltf-model="#farola" rotation="0 0 0" position="-5 0 -8.5" scale="0.8 0.8 0.7"> </a-entity>
-            <!-- Barrera -->
-            <a-entity gltf-model="#Barrera" rotation="0 0 0" position="10 0 -8.5" scale="0.8 0.8 0.7"> </a-entity>
-            <!-- semaforos -->
-            <a-entity gltf-model="#semaforos" rotation="0 180 0" position="4 0 11" scale="0.8 0.8 0.7"> </a-entity>
-            <!-- basurero -->
-            <a-entity gltf-model="#basurero" rotation="0 180 0" position="-4 0 10" scale="0.8 0.8 0.6"> </a-entity>
-            <a-video src="#videocubo"  rotation="0 180 0" position="-7 4 11" width="2.5" height="4.5"></a-video>
-           
-        
-            <a-image src="#cartelbasura" rotation="0 180 0" position="-5 4.5 11.50" width="8" height="8">  </a-image>
-        
-    
-            <!-- cartel -->
-            <a-image src="#cartel" rotation="0 -90 0" position="11 4 0" width="4.75" height="6.25">  </a-image>
-            <!-- cartel de jornadas -->
-            <a-image src="#jornadas" rotation="0 -90 0" position="11 4 6" width="4.75" height="6.25">  </a-image>
+        <!-- CASA CON SENSOR -->
+        <a-entity 
+            gltf-model="#casa1" 
+            rotation="0 90 0" 
+            position="-11 0 -5" 
+            scale="0.7 0.7 0.6">
+        </a-entity>
 
-        <!-- Fondo exterior -->
+        <!-- GARAJE -->
+        <a-entity 
+            gltf-model="#garaje" 
+            rotation="0 90 0" 
+            position="-11 0 6" 
+            scale="0.8 0.8 0.7">
+        </a-entity>
+
+        <!-- FAROLA -->
+        <a-entity 
+            gltf-model="#farola" 
+            rotation="0 0 0" 
+            position="-5 0 -8.5" 
+            scale="0.8 0.8 0.7">
+        </a-entity>
+
+        <!-- BARRERA -->
+        <a-entity 
+            gltf-model="#Barrera" 
+            rotation="0 0 0" 
+            position="10 0 -8.5" 
+            scale="0.8 0.8 0.7">
+        </a-entity>
+
+        <!-- SEMÁFOROS -->
+        <a-entity 
+            gltf-model="#semaforos" 
+            rotation="0 180 0" 
+            position="4 0 11" 
+            scale="0.8 0.8 0.7">
+        </a-entity>
+
+        <!-- BASURERO 3D -->
+        <a-entity 
+            gltf-model="#basurero" 
+            rotation="0 180 0" 
+            position="-4 0 10" 
+            scale="0.8 0.8 0.6">
+        </a-entity>
+
+        <!-- CARTEL DEL CUBO DE BASURA -->
+        <a-image 
+            src="#cartelbasura" 
+            rotation="0 180 0" 
+            position="-5 4.5 11.55" 
+            width="8" 
+            height="8">
+        </a-image>
+
+        <!-- PANTALLA DEL VÍDEO DEL CUBO DE BASURA -->
+        <a-plane
+            id="pantalla-video-cubo"
+            position="-7.6 4 11.45"
+            rotation="0 180 0"
+            width="2.5"
+            height="4.5"
+            material="shader: flat; src: #videocubo; side: double">
+        </a-plane>
+
+        <!-- CARTEL GENERAL -->
+        <a-image 
+            src="#cartel" 
+            rotation="0 -90 0" 
+            position="11 4 0" 
+            width="4.75" 
+            height="6.25">
+        </a-image>
+
+        <!-- CARTEL DE JORNADAS -->
+        <a-image 
+            src="#jornadas" 
+            rotation="0 -90 0" 
+            position="11 4 6" 
+            width="4.75" 
+            height="6.25">
+        </a-image>
+
+        <!-- FONDO EXTERIOR -->
         <a-sky color="#DDEEFF"></a-sky>
 
     </a-scene>
