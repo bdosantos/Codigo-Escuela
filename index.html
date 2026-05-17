@@ -22,16 +22,7 @@
              <a-asset-item id="basurero" src="basurero.glb"></a-asset-item>
             <img id="cartel" src="cartel.jpg">
             <img id="jornadas" src="jornadas.png">
-            <video 
-    id="video-cubo-basura" 
-    src="Cubo_basura.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-    webkit-playsinline
-    preload="auto">
-</video>
+            <video id="videocubo" src="videocubo.mp4" autoplay loop crossorigin="anonymous"></video>
              <img id="cartelbasura" src="cartelbasura.jpg">
         </a-assets>
 
@@ -88,13 +79,8 @@
             <a-entity gltf-model="#semaforos" rotation="0 180 0" position="4 0 11" scale="0.8 0.8 0.7"> </a-entity>
             <!-- basurero -->
             <a-entity gltf-model="#basurero" rotation="0 180 0" position="-4 0 10" scale="0.8 0.8 0.6"> </a-entity>
-            <a-plane
-    position="-8 4 11.5"
-    rotation="0 180 0"
-    width="4"
-    height="2.25"
-    material="shader: flat; src: #video-cubo-basura; side: double">
-</a-plane>
+            <a-video src="#videocubo"  rotation="0 180 0" position="-4 0 11" width="2.5" height="4.5"rotation="0 0 0"></a-video>
+           
         
             <a-image src="#cartelbasura" rotation="0 180 0" position="-5 4.5 11.50" width="8" height="8">  </a-image>
         
