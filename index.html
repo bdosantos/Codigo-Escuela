@@ -5,35 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prototipos inteligentes para el entorno urbano</title>
 
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-
-    <script>
-        AFRAME.registerComponent('activar-video', {
-            init: function () {
-                const video = document.querySelector('#videocubo');
-
-                function reproducir() {
-                    if (!video) return;
-
-                    video.muted = true;
-                    video.play().catch(function (error) {
-                        console.log("El navegador espera una interacción para reproducir el vídeo.");
-                    });
-                }
-
-                this.el.addEventListener('loaded', reproducir);
-                window.addEventListener('click', reproducir);
-                window.addEventListener('touchstart', reproducir);
-                window.addEventListener('keydown', reproducir);
-            }
-        });
-    </script>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 </head>
 
 <body>
-    <a-scene renderer="colorManagement: true" activar-video>
+    <a-scene background="color: #DDEEFF">
 
-        <!-- ASSETS -->
         <a-assets>
             <a-asset-item id="museo" src="museo.glb"></a-asset-item>
             <a-asset-item id="casa1" src="casa1.glb"></a-asset-item>
@@ -47,60 +24,26 @@
             <img id="jornadas" src="jornadas.png">
             <img id="cartelbasura" src="cartelbasura.jpg">
 
-            <video 
-                id="videocubo" 
-                src="videocubo.mp4" 
-                loop 
-                muted 
-                playsinline 
-                webkit-playsinline 
-                preload="auto">
-            </video>
+            <video id="videocubo" src="videocubo.mp4" autoplay loop crossorigin="anonymous"></video>
         </a-assets>
 
-        <!-- MUSEO -->
+        <!-- Museo CTIF -->
         <a-entity 
-            id="sala-ctif"  
             gltf-model="#museo"  
             position="0 0 0"  
             rotation="0 0 0"  
             scale="2 2 3">
         </a-entity>
 
-        <!-- LUCES -->
-        <a-light 
-            type="ambient" 
-            color="#FFFFFF" 
-            intensity="0.5">
-        </a-light>
-
-        <a-light 
-            type="directional" 
-            position="0 5 4" 
-            intensity="0.6" 
-            color="#FFFFFF">
-        </a-light>
-
-        <a-light 
-            type="point" 
-            position="0 3 0" 
-            intensity="0.35" 
-            distance="8" 
-            decay="2" 
-            color="#FFFFFF">
-        </a-light>
-
-        <!-- CÁMARA -->
-        <a-entity 
-            id="camara"
-            camera
-            look-controls
-            wasd-controls="acceleration: 12"
+        <!-- Cámara dentro del museo -->
+        <a-camera
             position="0 3 2.5"
-            rotation="0 0 0">
-        </a-entity>
+            wasd-controls="acceleration: 60"
+            look-controls="pointerLockEnabled: false">
+            <a-cursor></a-cursor>
+        </a-camera>
 
-        <!-- CASA CON SENSOR -->
+        <!-- Casa con sensor -->
         <a-entity 
             gltf-model="#casa1" 
             rotation="0 90 0" 
@@ -108,7 +51,7 @@
             scale="0.7 0.7 0.6">
         </a-entity>
 
-        <!-- GARAJE -->
+        <!-- Garaje -->
         <a-entity 
             gltf-model="#garaje" 
             rotation="0 90 0" 
@@ -116,7 +59,7 @@
             scale="0.8 0.8 0.7">
         </a-entity>
 
-        <!-- FAROLA -->
+        <!-- Farola -->
         <a-entity 
             gltf-model="#farola" 
             rotation="0 0 0" 
@@ -124,7 +67,7 @@
             scale="0.8 0.8 0.7">
         </a-entity>
 
-        <!-- BARRERA -->
+        <!-- Barrera -->
         <a-entity 
             gltf-model="#Barrera" 
             rotation="0 0 0" 
@@ -132,7 +75,7 @@
             scale="0.8 0.8 0.7">
         </a-entity>
 
-        <!-- SEMÁFOROS -->
+        <!-- Semáforos -->
         <a-entity 
             gltf-model="#semaforos" 
             rotation="0 180 0" 
@@ -140,7 +83,7 @@
             scale="0.8 0.8 0.7">
         </a-entity>
 
-        <!-- BASURERO 3D -->
+        <!-- Basurero 3D -->
         <a-entity 
             gltf-model="#basurero" 
             rotation="0 180 0" 
@@ -148,7 +91,7 @@
             scale="0.8 0.8 0.6">
         </a-entity>
 
-        <!-- CARTEL DEL CUBO DE BASURA -->
+        <!-- Cartel del cubo de basura -->
         <a-image 
             src="#cartelbasura" 
             rotation="0 180 0" 
@@ -157,17 +100,16 @@
             height="8">
         </a-image>
 
-        <!-- PANTALLA DEL VÍDEO DEL CUBO DE BASURA -->
-        <a-plane
-            id="pantalla-video-cubo"
-            position="-7.6 4 11.45"
-            rotation="0 180 0"
-            width="2.5"
-            height="4.5"
-            material="shader: flat; src: #videocubo; side: double">
-        </a-plane>
+        <!-- Vídeo del cubo de basura -->
+        <a-video 
+            src="#videocubo" 
+            position="-7 4 11.25" 
+            width="2.5" 
+            height="4.5" 
+            rotation="0 180 0">
+        </a-video>
 
-        <!-- CARTEL GENERAL -->
+        <!-- Cartel general -->
         <a-image 
             src="#cartel" 
             rotation="0 -90 0" 
@@ -176,7 +118,7 @@
             height="6.25">
         </a-image>
 
-        <!-- CARTEL DE JORNADAS -->
+        <!-- Cartel de jornadas -->
         <a-image 
             src="#jornadas" 
             rotation="0 -90 0" 
@@ -185,8 +127,9 @@
             height="6.25">
         </a-image>
 
-        <!-- FONDO EXTERIOR -->
-        <a-sky color="#DDEEFF"></a-sky>
+        <!-- Luz ambiente -->
+        <a-entity light="type: ambient; intensity: 0.75"></a-entity>
+        <a-entity light="type: directional; intensity: 0.75" position="1 4 1"></a-entity>
 
     </a-scene>
 </body>
