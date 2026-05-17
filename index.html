@@ -25,6 +25,7 @@
             <img id="jornadas" src="jornadas.png">
             <img id="cartelbasura" src="cartelbasura.jpg">
             <img id="cartebarrera" src="cartebarrera.jpg">
+            <img id="cartelgaraje" src="cartelgaraje.jpg">
 
             <video id="cubasura" src="cubasura.mp4" autoplay loop crossorigin="anonymous"></video>
             <video id="semaforosvideo" src="semaforosvideo.mp4" autoplay loop crossorigin="anonymous"></video>
@@ -58,9 +59,16 @@
         <a-entity 
             gltf-model="#garaje" 
             rotation="0 90 0" 
-            position="-11 0 6" 
+            position="0 0 -8" 
             scale="0.8 0.8 0.7">
         </a-entity>
+        <a-image 
+            src="#cartelgaraje" 
+            rotation="0 0 0" 
+            position="0 4.5 -10.5" 
+            width="8" 
+            height="8">
+        </a-image>
 
         <!-- Farola -->
         <a-entity 
