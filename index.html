@@ -21,6 +21,7 @@
             <img id="cartelsemaforos" src="cartelsemaforos.jpg">
             <a-asset-item id="basurero" src="basurero.glb"></a-asset-item>
 
+            <img id="informacion" src="informacion.jpg">
             <img id="cartel" src="cartel.jpg">
             <img id="jornadas" src="jornadas.png">
             <img id="cartelbasura" src="cartelbasura.jpg">
@@ -42,7 +43,7 @@
 
         <!-- Cámara dentro del museo -->
         <a-camera
-            position="0 3 2.5"
+            position="0 4 2.5"
             wasd-controls="acceleration: 60"
             look-controls="pointerLockEnabled: false">
             <a-cursor></a-cursor>
@@ -152,11 +153,20 @@
             rotation="0 180 0">
         </a-video>
 
+         <!-- Cartel informacion-->
+        <a-image 
+            src="#informacion" 
+            rotation="0 -90 0" 
+            position="11 4 0" 
+            width="3" 
+            height="3">
+        </a-image>
+        
         <!-- Cartel general -->
         <a-image 
             src="#cartel" 
             rotation="0 -90 0" 
-            position="11 4 0" 
+            position="11 4 4" 
             width="4.75" 
             height="6.25">
         </a-image>
@@ -165,7 +175,7 @@
         <a-image 
             src="#jornadas" 
             rotation="0 -90 0" 
-            position="11 4 6" 
+            position="11 4 9" 
             width="4.75" 
             height="6.25">
         </a-image>
